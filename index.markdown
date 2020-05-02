@@ -6,14 +6,10 @@ layout: index
 title: Home
 ---
 
-# **Hi!**
-I'm Miguel. You can call me an uber-generalist.
-I work for Le Wagon now.
+<h1> Hi! </h1>
+<p> I am an all round product guy with a background in psychology and organizational development. Today, I help out with designing the best tech learning experiences I can, building an agile team and tinkering with code. Currently taking care of Product and Growth at Le Wagon in Singapore</p>
 
-
-It would be cool to be able to display posts over here.
-
-<ul>
+<ul class="">
   {% for post in site.posts %}
     <li>
       <a href="{{ post.url }}">{{ post.title }}</a>

@@ -1,0 +1,95 @@
+---
+layout: post
+title:  "Ruby #trace_var"
+date:   2020-04-27 23:48:01 +0800
+categories: jekyll update
+---
+
+
+An obscure characteristic of Ruby is `#trace_var`, which allows to listen to changes in a variable and execute a callback.
+
+```ruby
+$counter = 0
+
+trace_var :$counter do |number|
+  puts "the counter is on #{number}"
+end
+
+10.times { $counter +=  1 }
+
+#=> the counter is on 1
+#=> the counter is on 2
+#=> the counter is on 3
+# ...
+```
+
+The concept of tracing changes in a variable is interesting - Different objects can listen to changes in a variable and coordinate their work without stepping in each other's toes. Let's build a simplified Fizz! and Buzz! yellers using `#trace_var`
+
+```ruby
+class FizzBuzzer
+  def initialize(*predecessors)
+    trace_var :$counter, ->(number) do
+      yell if yelling_condition
+    end
+  end
+
+end
+
+class Fizz < FizzBuzzer
+  def yell
+    puts "Fizz!"
+  end
+
+  private
+
+  def yelling_condition
+    $counter % 3 == 0
+  end
+
+end
+
+class Buzz < FizzBuzzer
+  def yell
+    puts "Buzz!"
+  end
+
+  private
+
+  def yelling_condition
+    $counter % 5 == 0
+  end
+
+end
+
+class NoFizzBuzz < FizzBuzzer
+  def yell
+    puts "#{$counter}"
+  end
+
+  private
+
+  def yelling_condition
+    $counter % 3 != 0 && $counter % 5 != 0
+  end
+
+end
+
+$counter = 0
+
+fizz = Fizz.new
+buzz = Buzz.new
+no_fizz_buzz = NoFizzBuzz.new
+
+15.times { $counter += 1 }
+```
+
+While the idea of listening to global variables is far from great for production code, you can certainly use `#trace_var` during debugging to see what code is messing with global variables.
+
+```ruby
+trace_var :$some_global_variable do |value|
+  puts "$some_global_variable = #{value}"
+  puts caller
+end
+```
+
+But if you are certainly in need of tracing variables and set callbacks, take a look at Ruby's TracePoint API.
