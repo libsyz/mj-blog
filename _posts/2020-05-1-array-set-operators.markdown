@@ -2,7 +2,7 @@
 layout: post
 title:  "Array Set Operators"
 date:   2020-04-27 23:48:01 +0800
-categories: jekyll update
+categories: til
 ---
 
 Ruby comes equipped with a bunch of amazing operators for Arrays.
