@@ -2,8 +2,6 @@
 # Jekyll needs front matter for SCSS files
 ---
 
-
-
 // overridden variables
 
 $gray-1: #f9f9f9 !default;
@@ -65,4 +63,28 @@ $sidebar-text-color: rgba($sidebar-fg-color, 0.75) !default;
 $sidebar-icon-color: rgba($sidebar-fg-color, 0.85) !default;
 
 
+// format overrides
+
+.container {
+  border-left: solid 1px #2d3748;
+}
+
+
 @import "hydeout";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
