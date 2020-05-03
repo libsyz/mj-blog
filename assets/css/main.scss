@@ -63,14 +63,27 @@ $sidebar-text-color: rgba($sidebar-fg-color, 0.75) !default;
 $sidebar-icon-color: rgba($sidebar-fg-color, 0.85) !default;
 
 
-// format overrides
+// Theme overrides
 
 .container {
   border-left: solid 1px #2d3748;
 }
 
-
 @import "hydeout";
+
+body {
+  background-attachment: fixed;
+  background-color: $sidebar-bg-color;
+  background-image: linear-gradient(to bottom, lighten($body-bg, 2%), darken($body-bg, 5%));
+  color: $lupin-dark;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+
+
+
 
 
 
